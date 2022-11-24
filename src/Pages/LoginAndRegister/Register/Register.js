@@ -12,14 +12,33 @@ const Register = () => {
   const navigate = useNavigate()
 
   const handleRegister = (data) => {
-    console.log(data)
     createUser(data.email,data.password)
     .then(result=>{
         const user = result.user
         updateProfile(data.name)
         if(user.uid){
-            toast.success('User Created Successfully')
-            navigate('/')
+          const user = {
+            name: data.name,
+            email:data.email,
+            role: data.role
+          }
+
+          fetch('http://localhost:5000/users',{
+            method: "POST",
+            headers: {
+              'content-type':'application/json'
+            },
+            body: JSON.stringify(user)
+          })
+          .then(res=>res.json())
+          .then(data=>{
+            if(data.acknowledged){
+              toast.success('User Created Successfully')
+              navigate('/')
+            }
+          })
+          .catch(e=>toast.error(e.message))
+            
         }
     })
     .catch(e=>toast.error(e.message))
