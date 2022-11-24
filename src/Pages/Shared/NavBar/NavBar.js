@@ -1,13 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../contexts/AuthContext/AuthProvider";
 
 const NavBar = () => {
+  const { user,logOut } = useContext(AuthContext);
 
-    const menuItems = < >
-    <li><Link to='/'>Home</Link></li>
-    <li><Link to='/'>My Orders</Link></li>
-    <li><Link to='/login'>Login</Link></li>
+  const menuItems = (
+    <>
+      <li>
+        <Link to="/">Home</Link>
+      </li>
+      <li>
+        <Link to="/">My Orders</Link>
+      </li>
+      {user?.email ? (
+        <li>
+          <button onClick={logOut}>Logout</button>
+        </li>
+      ) : (
+        <li>
+          <Link to="/login">Login</Link>
+        </li>
+      )}
     </>
+  );
   return (
     <div>
       <div className="navbar flex justify-around shadow-md py-3">
@@ -36,14 +52,14 @@ const NavBar = () => {
               {menuItems}
             </ul>
           </div>
-          <Link className="font-bold" to='/'><span className="text-3xl text-red-500">Car</span> <span className="text-2xl">Dealer</span></Link>
+          <Link className="font-bold" to="/">
+            <span className="text-3xl text-red-500">Car</span>{" "}
+            <span className="text-2xl">Dealer</span>
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu font-bold menu-horizontal p-0">
-          {menuItems}
-          </ul>
+          <ul className="menu font-bold menu-horizontal p-0">{menuItems}</ul>
         </div>
-       
       </div>
     </div>
   );

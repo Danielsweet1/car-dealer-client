@@ -6,7 +6,7 @@ import { AuthContext } from "../../../contexts/AuthContext/AuthProvider";
 import google from "../../../images/google.gif";
 
 const Register = () => {
-    const {googleLogin, createUser} = useContext(AuthContext)
+    const {googleLogin, createUser,updateUser} = useContext(AuthContext)
   const { register, handleSubmit } = useForm();
 
   const navigate = useNavigate()
@@ -15,6 +15,8 @@ const Register = () => {
     createUser(data.email,data.password)
     .then(result=>{
         const user = result.user
+        updateProfile(data.name)
+        console.log(user)
         if(user.uid){
             toast.success('User Created Successfully')
             navigate('/')
@@ -22,6 +24,13 @@ const Register = () => {
     })
     .catch(e=>toast.error(e.message))
   };
+
+
+  const updateProfile = name =>{
+    updateUser(name)
+    .then(()=>{})
+    .catch(e=>toast.error(e.message))
+  }
 
   const handleGoogle = ()=>{
     googleLogin()

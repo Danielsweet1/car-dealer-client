@@ -1,14 +1,22 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext/AuthProvider";
 import google from '../../../images/google.gif'
 
 const Login = () => {
-    const {googleLogin} = useContext(AuthContext)
+    const {googleLogin, logIn} = useContext(AuthContext)
     const { register, handleSubmit } = useForm();
     const handleLogin = data =>{
-        console.log(data)
+        logIn(data.email,data.password)
+        .then(result=>{
+            const user = result.user
+            if(user.email){
+                toast.success('Login successful')
+            }
+        })
+        .catch(e=>toast.error(e.message))
     }
 
     const handleGoogle = ()=>{
@@ -25,11 +33,11 @@ const Login = () => {
       <form onSubmit={handleSubmit(handleLogin)}>
         <div className="form-control mb-2">
           <label>Email</label>
-          <input className="input input-bordered" {...register("email")} />
+          <input type='email' className="input input-bordered" {...register("email")} required/>
         </div>
         <div className="form-control">
           <label>Password</label>
-          <input className="input input-bordered" {...register("password")} />
+          <input type='password' className="input input-bordered" {...register("password")} required/>
         </div>
         <input value="Login" className="btn w-full mt-5" type="submit" />
       </form>
