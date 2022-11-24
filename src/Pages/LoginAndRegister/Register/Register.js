@@ -1,13 +1,36 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../contexts/AuthContext/AuthProvider";
 import google from "../../../images/google.gif";
 
 const Register = () => {
+    const {googleLogin, createUser} = useContext(AuthContext)
   const { register, handleSubmit } = useForm();
+
+  const navigate = useNavigate()
+
   const handleRegister = (data) => {
-    console.log(data);
+    createUser(data.email,data.password)
+    .then(result=>{
+        const user = result.user
+        if(user.uid){
+            toast.success('User Created Successfully')
+            navigate('/')
+        }
+    })
+    .catch(e=>toast.error(e.message))
   };
+
+  const handleGoogle = ()=>{
+    googleLogin()
+    .then(result=>{
+        const user = result.user
+        console.log(user)
+    })
+    .catch(e=>console.log(e))
+  }
   return (
     <div className="my-16">
         <h2 className="text-center text-2xl mb-2">Welcome to <span className="text-red-500 font-bold">Car</span> <span className="font-bold">Dealer</span></h2>
@@ -16,15 +39,15 @@ const Register = () => {
         <form onSubmit={handleSubmit(handleRegister)}>
           <div className="form-control mb-2">
             <label>Name</label>
-            <input className="input input-bordered" {...register("name")} />
+            <input className="input input-bordered" {...register("name")} required/>
           </div>
           <div className="form-control mb-2">
             <label>Email</label>
-            <input className="input input-bordered" {...register("email")} />
+            <input type='email' className="input input-bordered" {...register("email")} required/>
           </div>
           <div className="form-control">
             <label>Password</label>
-            <input className="input input-bordered" {...register("password")} />
+            <input type='password' className="input input-bordered" {...register("password")} required/>
           </div>
           <input value="Register" className="btn w-full mt-5" type="submit" />
         </form>
@@ -35,6 +58,7 @@ const Register = () => {
         </p>
         <div className="w-full">
           <img
+          onClick={handleGoogle}
             className=" h-16 mx-auto border hover:cursor-pointer"
             src={google}
             alt=""
