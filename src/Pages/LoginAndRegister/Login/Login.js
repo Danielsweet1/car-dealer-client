@@ -28,7 +28,7 @@ const Login = () => {
         .catch(e=>console.log(e))
       }
   return (
-    <div className="w-96 my-16 mx-auto p-4 shadow-lg py-8 rounded">
+    <div className="w-96 my-16 mx-auto p-4 shadow-lg py-8 rounded-lg">
       <h3 className="text-2xl font-bold text-center">Login</h3>
       <form onSubmit={handleSubmit(handleLogin)}>
         <div className="form-control mb-2">

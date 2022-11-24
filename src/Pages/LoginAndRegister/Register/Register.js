@@ -12,11 +12,11 @@ const Register = () => {
   const navigate = useNavigate()
 
   const handleRegister = (data) => {
+    console.log(data)
     createUser(data.email,data.password)
     .then(result=>{
         const user = result.user
         updateProfile(data.name)
-        console.log(user)
         if(user.uid){
             toast.success('User Created Successfully')
             navigate('/')
@@ -43,7 +43,7 @@ const Register = () => {
   return (
     <div className="my-16">
         <h2 className="text-center text-2xl mb-2">Welcome to <span className="text-red-500 font-bold">Car</span> <span className="font-bold">Dealer</span></h2>
-      <div className="w-96  mx-auto p-4 shadow-lg py-8 rounded">
+      <div className="w-96  mx-auto p-4 shadow-lg py-8 rounded-lg">
         <h3 className="text-2xl font-bold text-center">Register</h3>
         <form onSubmit={handleSubmit(handleRegister)}>
           <div className="form-control mb-2">
@@ -58,6 +58,10 @@ const Register = () => {
             <label>Password</label>
             <input type='password' className="input input-bordered" {...register("password")} required/>
           </div>
+          <select className="select select-bordered w-full mt-4" {...register('role')}>
+            <option value="User">user</option>
+            <option value="Seller">seller</option>
+          </select>
           <input value="Register" className="btn w-full mt-5" type="submit" />
         </form>
         <p className="text-sm my-3 text-center">
