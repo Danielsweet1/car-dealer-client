@@ -1,9 +1,8 @@
 import React from "react";
 import { FaStar, FaStarHalfAlt, FaCheckCircle } from "react-icons/fa";
 
-const CarCard = ({ car }) => {
+const CarCard = ({ car,setItem }) => {
   const {
-    _id,
     brand,
     image_url,
     location,
@@ -11,7 +10,6 @@ const CarCard = ({ car }) => {
     original_price,
     resale_price,
     seller_name,
-    total_sell,
     verified,
     years_of_use,
   } = car;
@@ -52,6 +50,7 @@ const CarCard = ({ car }) => {
             </div>
           </div>
           <label
+          onClick={()=>setItem(car)}
             htmlFor="booking-modal"
             className="btn w-full mt-3 border-none bg-red-500 hover:bg-red-700"
           >
