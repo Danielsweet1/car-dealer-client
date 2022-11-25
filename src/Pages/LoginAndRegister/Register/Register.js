@@ -1,83 +1,107 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext/AuthProvider";
 import google from "../../../images/google.gif";
+import { useToken } from "../../../utilities/useToken";
 
 const Register = () => {
-    const {googleLogin, createUser,updateUser} = useContext(AuthContext)
+  const { googleLogin, createUser, updateUser } = useContext(AuthContext);
   const { register, handleSubmit } = useForm();
+  const [createdEmail, setCreatedEmail] = useState("");
+  const [token] = useToken(createdEmail);
+  const navigate = useNavigate();
 
-  const navigate = useNavigate()
-
+  if (token) {
+    navigate("/");
+  }
   const handleRegister = (data) => {
-    createUser(data.email,data.password)
-    .then(result=>{
-        const user = result.user
-        updateProfile(data.name)
-        if(user.uid){
+    createUser(data.email, data.password)
+      .then((result) => {
+        const user = result.user;
+        updateProfile(data.name);
+        setCreatedEmail(data.email)
+        if (user.uid) {
           const user = {
             name: data.name,
-            email:data.email,
-            role: data.role
-          }
+            email: data.email,
+            role: data.role,
+          };
 
-          fetch('http://localhost:5000/users',{
+          fetch("http://localhost:5000/users", {
             method: "POST",
             headers: {
-              'content-type':'application/json'
+              "content-type": "application/json",
             },
-            body: JSON.stringify(user)
+            body: JSON.stringify(user),
           })
-          .then(res=>res.json())
-          .then(data=>{
-            if(data.acknowledged){
-              toast.success('User Created Successfully')
-              navigate('/')
-            }
-          })
-          .catch(e=>toast.error(e.message))
-            
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.acknowledged) {
+                toast.success("User Created Successfully");
+                navigate("/");
+              }
+            })
+            .catch((e) => toast.error(e.message));
         }
-    })
-    .catch(e=>toast.error(e.message))
+      })
+      .catch((e) => toast.error(e.message));
   };
 
-
-  const updateProfile = name =>{
+  const updateProfile = (name) => {
     updateUser(name)
-    .then(()=>{})
-    .catch(e=>toast.error(e.message))
-  }
+      .then(() => {})
+      .catch((e) => toast.error(e.message));
+  };
 
-  const handleGoogle = ()=>{
+  const handleGoogle = () => {
     googleLogin()
-    .then(result=>{
-        const user = result.user
-        console.log(user)
-    })
-    .catch(e=>console.log(e))
-  }
+      .then((result) => {
+        const user = result.user;
+        navigate("/");
+      })
+      .catch((e) => console.log(e));
+  };
   return (
     <div className="my-16">
-        <h2 className="text-center text-2xl mb-2">Welcome to <span className="text-red-500 font-bold">Car</span> <span className="font-bold">Dealer</span></h2>
+      <h2 className="text-center text-2xl mb-2">
+        Welcome to <span className="text-red-500 font-bold">Car</span>{" "}
+        <span className="font-bold">Dealer</span>
+      </h2>
       <div className="w-96  mx-auto p-4 shadow-lg py-8 rounded-lg">
         <h3 className="text-2xl font-bold text-center">Register</h3>
         <form onSubmit={handleSubmit(handleRegister)}>
           <div className="form-control mb-2">
             <label>Name</label>
-            <input className="input input-bordered" {...register("name")} required/>
+            <input
+              className="input input-bordered"
+              {...register("name")}
+              required
+            />
           </div>
           <div className="form-control mb-2">
             <label>Email</label>
-            <input type='email' className="input input-bordered" {...register("email")} required/>
+            <input
+              type="email"
+              className="input input-bordered"
+              {...register("email")}
+              required
+            />
           </div>
           <div className="form-control">
             <label>Password</label>
-            <input type='password' className="input input-bordered" {...register("password")} required/>
+            <input
+              type="password"
+              className="input input-bordered"
+              {...register("password")}
+              required
+            />
           </div>
-          <select className="select select-bordered w-full mt-4" {...register('role')}>
+          <select
+            className="select select-bordered w-full mt-4"
+            {...register("role")}
+          >
             <option value="User">user</option>
             <option value="Seller">seller</option>
           </select>
@@ -90,7 +114,7 @@ const Register = () => {
         </p>
         <div className="w-full">
           <img
-          onClick={handleGoogle}
+            onClick={handleGoogle}
             className=" h-16 mx-auto border hover:cursor-pointer"
             src={google}
             alt=""
