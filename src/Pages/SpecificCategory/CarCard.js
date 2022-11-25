@@ -17,7 +17,7 @@ const CarCard = ({ car,setItem }) => {
 
   return (
     <div>
-      <div className="card w-96 rounded-lg shadow-md">
+      <div className="card w-96 h-[500px] rounded-lg shadow-md">
         <figure>
           <img className="w-full h-60" src={image_url} alt="Shoes" />
         </figure>

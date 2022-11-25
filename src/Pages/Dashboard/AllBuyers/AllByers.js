@@ -1,9 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import UseTitle from "../../../utilities/UseTitle";
 
-
-const AllByers = () => {
-  const { data: allbuyers = [] } = useQuery({
+const AllBuyers = () => {
+    UseTitle('All Buyers')
+  const { data: allbuyers = [], refetch } = useQuery({
     queryKey: ["allbuyers"],
     queryFn: async () => {
       const res = await fetch(`http://localhost:5000/allbuyers`, {
@@ -15,8 +16,24 @@ const AllByers = () => {
       return data;
     },
   });
+
+  const handleDelete = (id) => {
+    const proceed = window.confirm("Are You Sure You want to Delete?");
+    if (proceed) {
+      fetch(`http://localhost:5000/users/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deletedCount) {
+            refetch();
+          }
+        });
+    }
+  };
   return (
-    <div>
+    <div className="my-10">
+      <h2 className="text-3xl font-bold text-center my-2">All Buyers</h2>
       <div className="overflow-x-auto">
         <table className="table w-full">
           <thead>
@@ -30,12 +47,15 @@ const AllByers = () => {
           <tbody>
             {allbuyers &&
               allbuyers.map((buyer, i) => (
-                <tr>
+                <tr key={buyer._id}>
                   <th>{i + 1}</th>
                   <td>{buyer.name}</td>
                   <td>{buyer.email}</td>
                   <td>
-                    <button className="btn bg-red-500 hover:bg-red-700 ">
+                    <button
+                      onClick={() => handleDelete(buyer._id)}
+                      className="btn bg-red-500 hover:bg-red-700 "
+                    >
                       Delete
                     </button>
                   </td>
@@ -48,4 +68,4 @@ const AllByers = () => {
   );
 };
 
-export default AllByers;
+export default AllBuyers;

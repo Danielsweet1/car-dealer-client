@@ -1,11 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext,  } from "react";
+import React, { useContext,   } from "react";
 import { AuthContext } from "../../contexts/AuthContext/AuthProvider";
+import UseTitle from "../../utilities/UseTitle";
 import Loader from "../Shared/Loader/Loader";
 
+
 const MyOrders = () => {
+  UseTitle('My Orders')
   const { user } = useContext(AuthContext);
-  
 
   const { data: bookings = [],isLoading } = useQuery({
     queryKey: ["booking",user?.email],
@@ -21,9 +23,9 @@ const MyOrders = () => {
       return data;
     },
   });
-  if(isLoading){
-    return <Loader></Loader>
-  }
+if(isLoading){
+  return <Loader></Loader>
+}
   return (
     <div className="my-16">
         <h2 className="text-4xl text-center mb-6 font-bold">My Orders</h2>
