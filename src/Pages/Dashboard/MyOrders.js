@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useContext,   } from "react";
 import { AuthContext } from "../../contexts/AuthContext/AuthProvider";
 import UseTitle from "../../utilities/UseTitle";
-import Loader from "../Shared/Loader/Loader";
+
 
 
 const MyOrders = () => {

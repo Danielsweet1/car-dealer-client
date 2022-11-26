@@ -60,7 +60,7 @@ const AddProduct = () => {
       });
   };
   return (
-    <div className="m-5 w-96 p-5 shadow-md rounded-md">
+    <div className=" w-96 p-5 shadow-md mx-auto rounded-md">
       <h2 className="text-3xl text-center font-bold my-5 text-slate-700">
         Add a Car
       </h2>

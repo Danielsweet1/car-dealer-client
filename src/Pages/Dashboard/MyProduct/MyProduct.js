@@ -28,7 +28,7 @@ const MyProduct = () => {
         .then((res) => res.json())
         .then((data) => {
           if (data.deletedCount) {
-            toast.success('Deleted Successfully')
+            toast.success("Deleted Successfully");
             refetch();
           }
         });
@@ -44,6 +44,7 @@ const MyProduct = () => {
               <th>Model</th>
               <th>Price</th>
               <th>Status</th>
+              <th></th>
               <th>Action</th>
             </tr>
           </thead>
@@ -71,19 +72,39 @@ const MyProduct = () => {
                   </td>
                   <td>{product.model}</td>
                   <td>${product.resale_price}</td>
-                  <td>
-                    {!product?.sold ? (
-                      <button>Available</button>
-                    ) : (
-                      <span className="text-green-500">Sold</span>
-                    )}
-                  </td>
+                  {!product?.sold ? (
+                    <>
+                      <td>
+                        <button>Available</button>
+                      </td>
+                      <td>
+                        <button className="btn btn-outline btn-success">
+                          Advertise
+                        </button>
+                      </td>
+                    </>
+                  ) : (
+                    <span className="text-green-500">Sold</span>
+                  )}
                   <td>
                     <button
                       onClick={() => handleDelete(product._id)}
-                      className="btn btn-outline btn-error"
+                      className="btn btn-square btn-outline"
                     >
-                      Delete
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M6 18L18 6M6 6l12 12"
+                        />
+                      </svg>
                     </button>
                   </td>
                 </tr>

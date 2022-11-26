@@ -26,9 +26,8 @@ const AllSellers = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.result.modifiedCount) {
+        if (data.modifiedCount) {
           refetch();
-          console.log(data);
         }
       });
   };

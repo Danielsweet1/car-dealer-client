@@ -6,6 +6,7 @@ import AllBuyers from "../../Pages/Dashboard/AllBuyers/AllByers";
 import AllSellers from "../../Pages/Dashboard/AllSellers/AllSellers";
 import MyOrders from "../../Pages/Dashboard/MyOrders";
 import MyProduct from "../../Pages/Dashboard/MyProduct/MyProduct";
+import FourOFourRoute from "../../Pages/FourOFourRoute/FourOFourRoute";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/LoginAndRegister/Login/Login";
 import Register from "../../Pages/LoginAndRegister/Register/Register";
@@ -64,5 +65,9 @@ export const routes = createBrowserRouter([
                 element: <SellerRoute><MyProduct></MyProduct></SellerRoute>
             }
         ]
+    },
+    {
+        path:'*',
+        element: <FourOFourRoute></FourOFourRoute>
     }
 ])
