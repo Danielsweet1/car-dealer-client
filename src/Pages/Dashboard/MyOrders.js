@@ -9,7 +9,7 @@ const MyOrders = () => {
   UseTitle('My Orders')
   const { user } = useContext(AuthContext);
 
-  const { data: bookings = [],isLoading } = useQuery({
+  const { data: bookings = [] } = useQuery({
     queryKey: ["booking",user?.email],
     queryFn: async () => {
       const res = await fetch(
@@ -23,9 +23,6 @@ const MyOrders = () => {
       return data;
     },
   });
-if(isLoading){
-  return <Loader></Loader>
-}
   return (
     <div className="my-16">
         <h2 className="text-4xl text-center mb-6 font-bold">My Orders</h2>

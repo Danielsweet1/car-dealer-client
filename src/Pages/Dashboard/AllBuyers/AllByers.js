@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import UseTitle from "../../../utilities/UseTitle";
+import UseTitle from "../../../hooks/UseTitle";
 
 const AllBuyers = () => {
     UseTitle('All Buyers')

@@ -1,13 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
+import toast from "react-hot-toast";
 import { AuthContext } from "../../../contexts/AuthContext/AuthProvider";
-import UseTitle from "../../../utilities/UseTitle";
+import UseTitle from "../../../hooks/UseTitle";
 
 const MyProduct = () => {
   const { user } = useContext(AuthContext);
   UseTitle("My Products");
 
-  const { data: products = [] } = useQuery({
+  const { data: products = [], refetch } = useQuery({
     queryKey: ["products", user?.email],
     queryFn: async () => {
       const res = await fetch(
@@ -17,6 +18,22 @@ const MyProduct = () => {
       return data;
     },
   });
+
+  const handleDelete = (id) => {
+    const proceed = window.confirm("Are you sure you want to delete?");
+    if (proceed) {
+      fetch(`http://localhost:5000/myproducts/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deletedCount) {
+            toast.success('Deleted Successfully')
+            refetch();
+          }
+        });
+    }
+  };
   return (
     <div>
       <div className="overflow-x-auto w-full">
@@ -30,7 +47,7 @@ const MyProduct = () => {
               <th>Action</th>
             </tr>
           </thead>
-          <tbody >
+          <tbody>
             {products &&
               products.map((product) => (
                 <tr key={product._id}>
@@ -46,20 +63,29 @@ const MyProduct = () => {
                       </div>
                       <div>
                         <div className="font-bold">{product.seller_name}</div>
-                        <div className="text-sm opacity-50">{product.location}</div>
+                        <div className="text-sm opacity-50">
+                          {product.location}
+                        </div>
                       </div>
                     </div>
                   </td>
-                  <td>
-                    {product.model}
-                  </td>
+                  <td>{product.model}</td>
                   <td>${product.resale_price}</td>
                   <td>
-                    {
-                        !product?.sold ? <button>Available</button> : <span className="text-green-500">Sold</span>
-                    }
+                    {!product?.sold ? (
+                      <button>Available</button>
+                    ) : (
+                      <span className="text-green-500">Sold</span>
+                    )}
                   </td>
-                  <td><button className="btn btn-outline btn-error">Delete</button></td>
+                  <td>
+                    <button
+                      onClick={() => handleDelete(product._id)}
+                      className="btn btn-outline btn-error"
+                    >
+                      Delete
+                    </button>
+                  </td>
                 </tr>
               ))}
           </tbody>
