@@ -1,11 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../../Layouts/DashboardLayout";
 import Main from "../../Layouts/Main";
+import Blogs from "../../Pages/Blogs/Blogs";
 import AddProduct from "../../Pages/Dashboard/AddProduct/AddProduct";
 import AllBuyers from "../../Pages/Dashboard/AllBuyers/AllByers";
 import AllSellers from "../../Pages/Dashboard/AllSellers/AllSellers";
 import MyOrders from "../../Pages/Dashboard/MyOrders";
 import MyProduct from "../../Pages/Dashboard/MyProduct/MyProduct";
+import Payment from "../../Pages/Dashboard/Payment/Payment";
 import FourOFourRoute from "../../Pages/FourOFourRoute/FourOFourRoute";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/LoginAndRegister/Login/Login";
@@ -37,6 +39,10 @@ export const routes = createBrowserRouter([
                 path: '/category/:brand',
                 loader: ({params})=>fetch(`http://localhost:5000/category/${params.brand}`),
                 element: <PrivateRoute><SpecificCategory></SpecificCategory></PrivateRoute>
+            },
+            {
+                path: '/blogs',
+                element: <Blogs></Blogs>
             }
         ]
     },
@@ -59,6 +65,11 @@ export const routes = createBrowserRouter([
             {
                 path: '/dashboard/allbuyers',
                 element: <AdminRoute><AllBuyers></AllBuyers></AdminRoute>
+            },
+            {
+                path: '/dashboard/payment/:id',
+                loader: ({params})=>fetch(`http://localhost:5000/bookings/${params.id}`),
+                element: <BuyerRoute><Payment></Payment></BuyerRoute>
             },
             {
                 path:'/dashboard/myproduct',

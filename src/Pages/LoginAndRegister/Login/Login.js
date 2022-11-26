@@ -3,8 +3,9 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext/AuthProvider";
+import { useToken } from "../../../hooks/useToken";
 import google from "../../../images/google.gif";
-import { useToken } from "../../../utilities/useToken";
+
 
 const Login = () => {
   const { googleLogin, logIn } = useContext(AuthContext);

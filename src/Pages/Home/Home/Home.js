@@ -1,5 +1,5 @@
 import React from 'react';
-import UseTitle from '../../../utilities/UseTitle';
+import UseTitle from '../../../hooks/UseTitle';
 import Banner from '../Banner/Banner';
 import Categories from '../Categories/Categories';
 import Testimonials from '../Testimonials/Testimonials';

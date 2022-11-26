@@ -9,6 +9,7 @@ const NavBar = () => {
     <>
       <li>
         <Link to="/">Home</Link>
+        <Link to="/blogs">Blogs</Link>
       </li>
       {user?.email ? (
         <li>

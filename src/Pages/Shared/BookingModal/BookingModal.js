@@ -15,8 +15,9 @@ const BookingModal = ({item,setItem}) => {
     const price= form.price.value;
     const phone = form.phone.value;
     const location = form.location.value;
+    const image = item.image_url
     const booking = {
-      name,email,carModel,price,phone,location
+      name,email,carModel,price,phone,location,image
     }
 
     fetch('http://localhost:5000/booking',{

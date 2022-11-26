@@ -3,13 +3,13 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext/AuthProvider";
-import UseTitle from "../../../utilities/UseTitle";
+import UseTitle from "../../../hooks/UseTitle";
 
 const AddProduct = () => {
-  UseTitle('Add Product')
+  UseTitle("Add Product");
   const { user } = useContext(AuthContext);
   const { register, handleSubmit } = useForm();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleAddProduct = (data) => {
     const image = data.image[0];
@@ -42,6 +42,11 @@ const AddProduct = () => {
             details: data.description,
           };
 
+          const category = {
+            brand: data.brand,
+            image: imgData.data.url,
+          };
+
           fetch("http://localhost:5000/cars", {
             method: "POST",
             headers: {
@@ -52,8 +57,18 @@ const AddProduct = () => {
             .then((res) => res.json())
             .then((data) => {
               if (data.acknowledged) {
-                toast.success("Car added Successfully");
-                navigate('/dashboard/myproduct')
+                fetch("http://localhost:5000/category", {
+                  method: "POST",
+                  headers: {
+                    "content-type": "application/json",
+                  },
+                  body: JSON.stringify(category),
+                })
+                  .then((res) => res.json())
+                  .then((data) => {
+                    toast.success("Car added Successfully");
+                    navigate("/dashboard/myproduct");
+                  });
               }
             });
         }
