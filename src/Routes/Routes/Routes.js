@@ -11,7 +11,9 @@ import Login from "../../Pages/LoginAndRegister/Login/Login";
 import Register from "../../Pages/LoginAndRegister/Register/Register";
 import SpecificCategory from "../../Pages/SpecificCategory/SpecificCategory";
 import AdminRoute from "../AdminRoute/AdminRoute";
+import BuyerRoute from "../BuyerRoute/BuyerRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import SellerRoute from "../SellerRoute/SellerRoute";
 
 export const routes = createBrowserRouter([
     {
@@ -42,12 +44,12 @@ export const routes = createBrowserRouter([
         element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
         children: [
             {
-                path: '/dashboard',
-                element:<MyOrders></MyOrders>
+                path: '/dashboard/myorders',
+                element:<BuyerRoute><MyOrders></MyOrders></BuyerRoute>
             },
             {
                 path: '/dashboard/addproduct',
-                element:<AddProduct></AddProduct>
+                element:<SellerRoute><AddProduct></AddProduct></SellerRoute>
             },
             {
                 path: '/dashboard/allsellers',
@@ -59,7 +61,7 @@ export const routes = createBrowserRouter([
             },
             {
                 path:'/dashboard/myproduct',
-                element: <MyProduct></MyProduct>
+                element: <SellerRoute><MyProduct></MyProduct></SellerRoute>
             }
         ]
     }

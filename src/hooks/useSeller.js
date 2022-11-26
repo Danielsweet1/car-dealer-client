@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-export const useAdmin = email =>{
+export const useSeller = email =>{
     const [isSeller, setIsSeller]= useState(false)
     const [isSellerLoading, setIsSellerLoading] = useState(true)
 

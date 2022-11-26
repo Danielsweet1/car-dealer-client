@@ -59,7 +59,10 @@ const Register = () => {
     googleLogin()
       .then((result) => {
         const user = result.user;
-        navigate("/");
+        if(user.email){
+          setCreatedEmail(user.email)
+          navigate("/");
+        }
       })
       .catch((e) => console.log(e));
   };
