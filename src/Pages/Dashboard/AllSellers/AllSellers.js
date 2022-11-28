@@ -7,7 +7,7 @@ const AllSellers = () => {
   const { data: allsellers = [], refetch } = useQuery({
     queryKey: ["allsellers"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/allsellers`, {
+      const res = await fetch(`https://car-dealer-server.vercel.app/allsellers`, {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -18,7 +18,7 @@ const AllSellers = () => {
   });
 
   const handleVerify = (id) => {
-    fetch(`http://localhost:5000/seller/${id}`, {
+    fetch(`https://car-dealer-server.vercel.app/seller/${id}`, {
       method: "PUT",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -35,7 +35,7 @@ const AllSellers = () => {
   const handleDelete = (id) => {
     const proceed = window.confirm("Are You Sure You want to Delete?");
     if(proceed){
-      fetch(`http://localhost:5000/users/${id}`, {
+      fetch(`https://car-dealer-server.vercel.app/users/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

@@ -11,7 +11,7 @@ const AddProvider = ({children}) => {
   
 
     const handleAdd = id =>{
-        axios.get(`http://localhost:5000/myproducts/${id}`)
+        axios.get(`https://car-dealer-server.vercel.app/myproducts/${id}`)
         .then(res=>{
             console.log(res.data)
             setProduct(res.data)

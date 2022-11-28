@@ -47,7 +47,7 @@ const AddProduct = () => {
             image: imgData.data.url,
           };
 
-          fetch("http://localhost:5000/cars", {
+          fetch("https://car-dealer-server.vercel.app/cars", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -57,7 +57,7 @@ const AddProduct = () => {
             .then((res) => res.json())
             .then((data) => {
               if (data.acknowledged) {
-                fetch("http://localhost:5000/category", {
+                fetch("https://car-dealer-server.vercel.app/category", {
                   method: "POST",
                   headers: {
                     "content-type": "application/json",

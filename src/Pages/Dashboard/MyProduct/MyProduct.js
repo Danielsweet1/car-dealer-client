@@ -14,7 +14,7 @@ const MyProduct = () => {
     queryKey: ["products", user?.email],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/myproducts?email=${user?.email}`
+        `https://car-dealer-server.vercel.app/myproducts?email=${user?.email}`
       );
       const data = await res.json();
       return data;
@@ -24,7 +24,7 @@ const MyProduct = () => {
   const handleDelete = (id) => {
     const proceed = window.confirm("Are you sure you want to delete?");
     if (proceed) {
-      fetch(`http://localhost:5000/myproducts/${id}`, {
+      fetch(`https://car-dealer-server.vercel.app/myproducts/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

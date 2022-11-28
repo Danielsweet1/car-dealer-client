@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+
 import ReportCard from './ReportCard';
 
 const ReportToAdmin = () => {
@@ -8,7 +8,7 @@ const ReportToAdmin = () => {
     const {data:reports= [], refetch}= useQuery({
         queryKey: ['reports'],
         queryFn: async()=>{
-            const res = await fetch(`http://localhost:5000/reporteditems`)
+            const res = await fetch(`https://car-dealer-server.vercel.app/reporteditems`)
             const data = res.json()
             return data
         }
@@ -17,7 +17,7 @@ const ReportToAdmin = () => {
     const handleDelete = id =>{
         const proceed = window.confirm(`Are you sure to Delete?`)
         if(proceed){
-            fetch(`http://localhost:5000/reporteditems/${id}`,{
+            fetch(`https://car-dealer-server.vercel.app/reporteditems/${id}`,{
                 method: 'DELETE'
             })
             .then(res=>res.json())

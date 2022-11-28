@@ -6,7 +6,7 @@ export const useBuyer = email =>{
 
         useEffect(()=>{
             if(email){
-                fetch(`http://localhost:5000/user/buyer/${email}`,{
+                fetch(`https://car-dealer-server.vercel.app/user/buyer/${email}`,{
                     headers: {
                         authorization: `Bearer ${localStorage.getItem('accessToken')}`
                     }
