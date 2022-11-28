@@ -1,13 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
-import { AddContext } from "../../../contexts/addProvider/AddProvider";
 import { AuthContext } from "../../../contexts/AuthContext/AuthProvider";
 import UseTitle from "../../../hooks/UseTitle";
 
 const MyProduct = () => {
   const { user } = useContext(AuthContext);
-  const {handleAdd} = useContext(AddContext)
   UseTitle("My Products");
 
   const { data: products = [], refetch } = useQuery({
@@ -20,6 +18,20 @@ const MyProduct = () => {
       return data;
     },
   });
+
+
+  const handleAdd = product =>{
+    fetch(`https://car-dealer-server.vercel.app/advertise`,{
+      method: 'POST',
+      headers:{
+        'content-type': 'application/json'
+      },
+      body:JSON.stringify(product)
+      
+    })
+    .then(res=>res.json())
+    .then(data=>{})
+  }
 
   const handleDelete = (id) => {
     const proceed = window.confirm("Are you sure you want to delete?");
@@ -80,7 +92,7 @@ const MyProduct = () => {
                         <button>Available</button>
                       </td>
                       <td>
-                        <button onClick={()=>handleAdd(product._id)} className="btn btn-outline btn-success">
+                        <button onClick={()=>handleAdd(product)} className="btn btn-outline btn-success">
                           Advertise
                         </button>
                       </td>
