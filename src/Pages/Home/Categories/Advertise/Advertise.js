@@ -1,7 +1,10 @@
-import React from "react";
-import { FaStar, FaStarHalfAlt, FaCheckCircle } from "react-icons/fa";
+import React, { useContext, useState } from "react";
+import { FaCheckCircle, FaStar, FaStarHalfAlt } from "react-icons/fa";
+import { AddContext } from "../../../../contexts/addProvider/AddProvider";
 
-const CarCard = ({ car, setItem }) => {
+const Advertise = () => {
+  
+  const { product } = useContext(AddContext);
   const {
     brand,
     image_url,
@@ -12,12 +15,13 @@ const CarCard = ({ car, setItem }) => {
     seller_name,
     verified,
     years_of_use,
-    sold,
-  } = car;
-
+    sold
+  } = product;
   return (
-    <div>
-        <div className={`card w-96 h-[500px] rounded-lg shadow-md `}>
+      <div className={`my-20 max-w-screen-xl mx-auto ${sold ? 'hidden' : 'block'}`}>
+          <h2 className="text-3xl text-center mb-7 font-bold">Advertisement</h2>
+
+        <div className="card w-96 h-[500px] rounded-lg shadow-md">
           <figure>
             <img className="w-full h-60" src={image_url} alt="Shoes" />
           </figure>
@@ -49,23 +53,10 @@ const CarCard = ({ car, setItem }) => {
                 <p>used for: {years_of_use}</p>
               </div>
             </div>
-            {
-              !sold ? <label
-              onClick={() => setItem(car)}
-              htmlFor="booking-modal"
-              className="btn w-full mt-3 border-none bg-red-500 hover:bg-red-700"
-            >
-              Book Now
-            </label> : <label
-              className="btn w-full mt-3 border-none bg-red-500 hover:bg-red-700"
-            disabled={true}>
-              Sold Out
-            </label>
-            }
           </div>
         </div>
     </div>
   );
 };
 
-export default CarCard;
+export default Advertise;

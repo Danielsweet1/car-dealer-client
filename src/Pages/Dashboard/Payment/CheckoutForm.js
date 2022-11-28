@@ -10,7 +10,7 @@ const CheckoutForm = ({ data }) => {
   const [processing, setProcessing] = useState(false);
   const [clientSecret, setClientSecret] = useState("");
 
-  const { price, name, email, _id } = data;
+  const { price, name, email, _id,productId } = data;
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
@@ -72,6 +72,7 @@ const CheckoutForm = ({ data }) => {
         email,
         transactionId: paymentIntent.id,
         bookingId: _id,
+        productId: productId
       };
       fetch("http://localhost:5000/payment", {
         method: "POST",

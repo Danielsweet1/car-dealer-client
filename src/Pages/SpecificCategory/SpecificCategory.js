@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useLoaderData } from "react-router-dom";
+import UseTitle from "../../hooks/UseTitle";
 import BookingModal from "../Shared/BookingModal/BookingModal";
 import CarCard from "./CarCard";
 
 const SpecificCategory = () => {
-  
+  UseTitle('Avaiable Cars')
   const cars = useLoaderData();
   const [item, setItem]= useState(null)
 

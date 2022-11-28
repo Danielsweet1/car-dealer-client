@@ -1,11 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
+import { AddContext } from "../../../contexts/addProvider/AddProvider";
 import { AuthContext } from "../../../contexts/AuthContext/AuthProvider";
 import UseTitle from "../../../hooks/UseTitle";
 
 const MyProduct = () => {
   const { user } = useContext(AuthContext);
+  const {handleAdd} = useContext(AddContext)
   UseTitle("My Products");
 
   const { data: products = [], refetch } = useQuery({
@@ -78,13 +80,16 @@ const MyProduct = () => {
                         <button>Available</button>
                       </td>
                       <td>
-                        <button className="btn btn-outline btn-success">
+                        <button onClick={()=>handleAdd(product._id)} className="btn btn-outline btn-success">
                           Advertise
                         </button>
                       </td>
                     </>
                   ) : (
-                    <span className="text-green-500">Sold</span>
+                    <>
+                    <td><span className="text-green-500">Sold</span></td>
+                    <td></td>
+                    </>
                   )}
                   <td>
                     <button

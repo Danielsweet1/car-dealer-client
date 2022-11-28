@@ -59,10 +59,28 @@ const Register = () => {
   const handleGoogle = () => {
     googleLogin()
       .then((result) => {
-        const user = result.user;
-        if(user.email){
-          setCreatedEmail(user.email)
-          navigate("/");
+        const users = result.user;
+        if(users.email){
+          const user = {
+            name: users.displayName,
+            email: users.email,
+            role: 'User',
+          };
+          fetch("http://localhost:5000/users", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(user),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.acknowledged) {
+                toast.success("User Created Successfully");
+                navigate("/");
+                setCreatedEmail(user.email)
+              }
+            })
         }
       })
       .catch((e) => console.log(e));
