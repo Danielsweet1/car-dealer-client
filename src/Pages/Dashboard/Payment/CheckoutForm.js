@@ -1,8 +1,10 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useEffect, useState } from "react";
+import UseTitle from "../../../hooks/UseTitle";
 
 const CheckoutForm = ({ data }) => {
   const stripe = useStripe();
+  UseTitle('Payment')
   const elements = useElements();
   const [errStripe, setErrStripe] = useState("");
   const [success, setSuccess] = useState("");
@@ -95,6 +97,7 @@ const CheckoutForm = ({ data }) => {
 
   return (
     <form onSubmit={handleSubmit} className="py-5 mt-5">
+      <div className="text-center">{errStripe}</div>
       <CardElement
         options={{
           style: {

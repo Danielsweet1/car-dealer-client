@@ -8,6 +8,7 @@ import AllSellers from "../../Pages/Dashboard/AllSellers/AllSellers";
 import MyOrders from "../../Pages/Dashboard/MyOrders";
 import MyProduct from "../../Pages/Dashboard/MyProduct/MyProduct";
 import Payment from "../../Pages/Dashboard/Payment/Payment";
+import ReportToAdmin from "../../Pages/Dashboard/ReportToAdmin/ReportToAdmin";
 import FourOFourRoute from "../../Pages/FourOFourRoute/FourOFourRoute";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/LoginAndRegister/Login/Login";
@@ -74,6 +75,10 @@ export const routes = createBrowserRouter([
             {
                 path:'/dashboard/myproduct',
                 element: <SellerRoute><MyProduct></MyProduct></SellerRoute>
+            },
+            {
+                path:'/dashboard/reporteditems',
+                element: <AdminRoute><ReportToAdmin/></AdminRoute>
             }
         ]
     },

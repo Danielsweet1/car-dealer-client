@@ -15,8 +15,29 @@ const CarCard = ({ car, setItem }) => {
     sold,
   } = car;
 
+  const report = {
+    image: image_url,
+    model:model,
+    sellerName: seller_name,
+    price: resale_price
+  }
+
+  const handleReport = ()=>{
+    fetch('http://localhost:5000/reporteditems',{
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(report)
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      console.log(data)
+    })
+  }
+
   return (
-    <div>
+    <div className={`${sold ? 'hidden' : 'block'}`}>
         <div className={`card w-96 h-[500px] rounded-lg shadow-md `}>
           <figure>
             <img className="w-full h-60" src={image_url} alt="Shoes" />
@@ -49,6 +70,7 @@ const CarCard = ({ car, setItem }) => {
                 <p>used for: {years_of_use}</p>
               </div>
             </div>
+              <button onClick={handleReport} className="btn btn-sm btn-outline block w-1/2 mx-auto">Report</button>
             {
               !sold ? <label
               onClick={() => setItem(car)}

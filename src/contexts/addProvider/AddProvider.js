@@ -1,6 +1,6 @@
-import React, { createContext, useEffect, useState, } from 'react';
+import React, { createContext, useState, } from 'react';
 import axios from 'axios';
-import Loader from '../../Pages/Shared/Loader/Loader';
+
 
 
 export const AddContext = createContext()
