@@ -12,7 +12,7 @@ const Banner = () => {
         <div className="hero-content text-center text-neutral-content">
           <div className="max-w-md">
             <p className="text-3xl font-semibold mb-4">Welcome to Our Stunning</p>
-            <h1 className="mb-5 text-5xl  font-bold">Car Dealer Website</h1>
+            <h1 className="mb-5 text-5xl  font-bold">Car Dealer</h1>
           </div>
         </div>
       </div>

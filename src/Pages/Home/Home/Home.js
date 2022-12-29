@@ -1,9 +1,10 @@
 import React from 'react';
 import UseTitle from '../../../hooks/UseTitle';
 import Banner from '../Banner/Banner';
-import Advertise from '../Categories/Advertise/Advertise';
 import Categories from '../Categories/Categories';
+import Serve from '../serve/Serve';
 import Testimonials from '../Testimonials/Testimonials';
+import ContactMe from './ContactUs/ContactUs';
 
 const Home = () => {
     UseTitle('Home')
@@ -11,8 +12,9 @@ const Home = () => {
         <div >
         <Banner></Banner>
         <Categories></Categories>
-        <Advertise></Advertise>
+        <Serve/>
         <Testimonials></Testimonials>
+        <ContactMe/>
         </div>
     );
 };

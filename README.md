@@ -1,4 +1,22 @@
 
+<<<<<<< HEAD
+=======
+project name: Car Dealer
+live site: https://car-dealer-edd01.web.app/
+
+
+features:
+* site is made my tailwind and daisyui
+* responsive for mobile tablet and desktop
+* there are 3 category of cars seller can add new category
+* there are 3 different roles admin seller ar buyer/user
+* seller can add product and see the products he added
+* admin can see all buyers and all sellers and able to delete them
+
+
+adminEmail: daniel@sweet.com
+adminPassword: 123456
+>>>>>>> 5d58756daeaec9767d554fff01541d2434b6dd6b
 
 
 # Getting Started with Create React App
