@@ -25,7 +25,7 @@ const NavBar = () => {
   );
   return (
     <div>
-      <div className="navbar flex justify-around shadow-md py-3">
+      <div className="navbar flex justify-around py-3">
         <div className="navbar-start ">
           <div className="dropdown mr-5">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -57,7 +57,7 @@ const NavBar = () => {
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu font-bold menu-horizontal p-0">{menuItems}</ul>
+          <ul className="menu font-bold menu-horizontal hover:bg-white p-0">{menuItems}</ul>
         </div>
         <label tabIndex={2} htmlFor="dashboard-drawer" className="btn btn-ghost lg:hidden">
               <svg

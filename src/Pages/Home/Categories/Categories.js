@@ -13,11 +13,11 @@ const Categories = () => {
   });
 
   return (
-    <div className="my-20">
+    <div className="my-20 ">
       <h3 className="text-4xl font-bold text-center">Second Hand Cars</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-5">
         {cars.map((car) => (
-          <div className="w-80 mx-auto border p-4" key={car._id}>
+          <div className="w-80 mx-auto hover:shadow-2xl border p-4" key={car._id}>
             <img className="w-full h-48 border" src={car.image} alt="" />
             <div className="flex justify-center">
               <Link to={`/category/${car.brand}`}>

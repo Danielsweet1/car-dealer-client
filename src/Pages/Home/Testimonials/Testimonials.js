@@ -2,8 +2,8 @@ import React from 'react';
 import people1 from '../../../images/people1.webp'
 import people2 from '../../../images/people2.jpg'
 import people3 from '../../../images/people3.jpg'
-import car1 from '../../../images/toyota1.jpg'
-import car2 from '../../../images/toyota2.jpeg'
+import car1 from '../../../images/download.jpg'
+import car2 from '../../../images/car2.jpg'
 import car3 from '../../../images/car3.jpg'
 import TestimonialCard from './TestimonialCard';
 

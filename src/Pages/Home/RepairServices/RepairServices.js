@@ -1,4 +1,5 @@
 import React from "react";
+import Zoom from "react-reveal/Zoom";
 
 const RepairServices = () => {
   const data = [
@@ -100,18 +101,28 @@ const RepairServices = () => {
     <div className="my-20">
       <div>
         <h2 className="text-4xl font-bold text-center">Our Repair Services</h2>
-        <p className="mt-3 text-center">We have a name on selling and buying cars also we have our own macanic to repair cars</p>
+        <p className="mt-3 text-center">
+          We have a name on selling and buying cars also we have our own macanic
+          to repair cars
+        </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-5 max-w-screen-lg mx-auto gap-8">
-        {
-            data.map(item=><div key={item._id} className='border shadow pb-5'>
-                <img className="w-full h-60" src={item.img} alt="" />
+        {data.map((item) => (
+          <div key={item._id} className="border shadow hover:shadow-xl pb-5">
+            <Zoom bottom>
+              <div>
+                <img className="w-full  h-60" src={item.img} alt="" />
+                <p className="text-center text-xl font-bold my-2">
+                  {item.title}
+                </p>
                 <div className="flex justify-around items-center mt-3">
-                    <p className="font-bold">Price: {item.price}</p>
-                    <button className="btn btn-primary">Book</button>
+                  <p className="font-bold">Price: {item.price}</p>
+                  <button className="btn btn-primary">Book</button>
                 </div>
-            </div>)
-        }
+              </div>
+            </Zoom>
+          </div>
+        ))}
       </div>
     </div>
   );
